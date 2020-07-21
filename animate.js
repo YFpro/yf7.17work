@@ -1,3 +1,63 @@
+function animate(obj,attrObj,duration,fn,callback) {
+    clearInterval(obj.t);
+    //参数初始化
+    if (obj.nodeType!=1){
+    console.error("对象的类型不对");
+    return;
+    }
+    var start = {};
+    var change = {};
+    var time = 0;
+    var fn = fn || Tween.Linear;
+    console.log(fn);
+
+    for(var i in attrObj){
+        start[i] = parseInt(getComputedStyle(obj,null)[i]);
+        change[i] = attrObj[i] - start[i];
+    }
+        obj.t= setInterval(function (){
+        time += 50;
+        for(var i in attrObj) {
+        obj.style[i] = fn(time,start[i],change[i],
+        duration)+"px"
+        }
+        if (time >= duration){
+        for (var i in attrObj){
+        obj.style[i] = attrObj[i]+"px"
+    }
+        clearInterval(obj.t);
+        if(callback){
+            callback();
+        }
+      } 
+    },50)
+}
+ function css(obj,attr,val){
+     if(arguments.length==2){
+      switch(attr){
+        case "background":
+        case "color":
+        return getComputedStyle(obj,null)[attr];
+        break;
+        default:
+        return parseInt(getComputedStyle(obj,null)[attr]);
+    }
+         } else if(arguments.length==3){
+             switch(attr){
+                 case "background":
+                 case "color":
+                 case "opacity": 
+                case  "border":
+                    obj.style [attr]=val;
+                    break;
+                     default:
+                     obj.style[attr]=val+"px";
+
+             }
+         }
+}
+ 
+
 //动画算法
             /*
 		    Linear：无缓动效果(匀速运动)；

@@ -240,7 +240,12 @@ var but = document.querySelectorAll(".butt li");
 var num = 0;
 
 
-
+//自增
+var banner=document.querySelector(".banner");
+     setInterval(function(){
+        banner.back
+     },2000)
+     //
 var t = setInterval(() => {
     num++;
     if (num > imgs.length - 1) {
@@ -252,13 +257,14 @@ var t = setInterval(() => {
         but[i].style.background = "#000";
         but[i].style.opacity = 0.3;
     }
+    
     animate(imgs[num], {
         opacity: 1
     }, 300, Tween.Linear, function () {
         imgs[num].style.zIndex = 1;
         but[num].style.background = "#fff"
     })
-}, 3000);
+}, 2000);
 
 
 for (let h = 0; h < but.length; h++) {
